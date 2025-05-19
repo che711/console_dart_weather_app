@@ -1,32 +1,29 @@
 class Weather {
   final String lastUpdate;
   final String cityName;
-  final String tempC;
-  final String feelsLikeC;
+  final double tempC;  
+  final double feelsLikeC;
   final String condition;
+
+  Weather({
+    required this.lastUpdate,
+    required this.cityName,
+    required this.tempC,
+    required this.feelsLikeC,
+    required this.condition,
+  });
+
+  factory Weather.fromJson(Map<String, dynamic> json) {
+    final currentData = json['current'];
+    final locationData = json['location'];
+    final conditionData = currentData['condition'];  
+    
+    return Weather(
+      lastUpdate: currentData['last_updated'].toString(),
+      cityName: locationData['name'].toString(),
+      tempC: currentData['temp_c'].toDouble(),
+      feelsLikeC: currentData['feelslike_c'].toDouble(), 
+      condition: conditionData['text'].toString(),
+    );
+  }
 }
-
-Weather({
-  required this.lastUpdate,
-  required this.cityName,
-  required this.tempC,
-  required this.feelsLikeC,
-  required this.condition,
-});
-
-
-factory Weather.fromJson(Map<String, dynamic> json) {
-  final currentData = json['current'];
-  final conditionData = currentData['conditions'];
-  return Weather(
-    lastUpdate: currentData['last_updated'],
-    cityName: json['location']['name'],
-    tempC: currentData['temp_c'].toDouble(),
-    feelsLikeC: currentData['leelslike_c'].toDouble(),
-    condition: conditionData['text'],
-  );
-}
-
-
-
-
