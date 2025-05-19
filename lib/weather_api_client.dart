@@ -5,8 +5,10 @@ import 'package:console_dart_weather_app/config.dart';
 
 class WeatherApiClient {
   Future<Weather> getCurrentWeather(String cityName) async {
+    http://api.weatherapi.com/v1/current.json?key=&q=London&aqi=no
+
     final url = 
-    '${Config().baseUrl}${Config().currentUrl}?key=${Config().apiKey}&q=$cityName';
+    '${Config().baseUrl}${Config().currentUrl}?key=${Config().apiKey}&q=$cityName&aqi=no';
     print(url);
 
     final response = await http.get(Uri.parse(url));
